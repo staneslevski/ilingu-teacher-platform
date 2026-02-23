@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+      - npm ci
+  pre_build:
+    commands:
+      - ./aws-config/bin/assume-role.sh
+      - export AWS_PROFILE=target_account_profile
+      - aws sts get-caller-identity
+  build:
+    commands:
+      - echo Build started on `date`
+      - npm run build:$STAGE
+#      - aws s3 sync build s3://ilingu-platform-$REACT_APP_STAGE
+#      - aws cloudfront create-invalidation --distribution-id $CF_DISTRIBUTION_ID --paths /
+  post_build:
+    commands:
+      - echo Build completed on `date`
+#      - ./aws-config/bin/test_if_test.sh
