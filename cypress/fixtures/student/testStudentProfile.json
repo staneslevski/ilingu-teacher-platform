@@ -1,0 +1,49 @@
+{
+  "avatar": {
+  "access_mode": "public",
+    "bytes": 19585,
+    "coordinates": {
+    "faces": [
+      [
+        67,
+        4,
+        384,
+        512
+      ]
+    ]
+  },
+  "created_at": "2019-05-04T03:33:35Z",
+    "etag": "0f334685047acb98e525e36c2fa17d7d",
+    "faces": [
+    [
+      67,
+      4,
+      384,
+      512
+    ]
+  ],
+    "format": "jpg",
+    "height": 700,
+    "original_filename": "Passport pic",
+    "pages": 1,
+    "path": "v1556940815/ilingu/student-profile-pictures/lyiqao6fvpu2bg83wrlj.jpg",
+    "placeholder": false,
+    "public_id": "ilingu/student-profile-pictures/lyiqao6fvpu2bg83wrlj",
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/ilingu/image/upload/v1556940815/ilingu/student-profile-pictures/lyiqao6fvpu2bg83wrlj.jpg",
+    "signature": "c19342642961187fc4624979cd15f1ec4c65c06e",
+    "tags": [],
+    "thumbnail_url": "https://res.cloudinary.com/ilingu/image/upload/c_limit,h_60,w_90/v1556940815/ilingu/student-profile-pictures/lyiqao6fvpu2bg83wrlj.jpg",
+    "type": "upload",
+    "url": "http://res.cloudinary.com/ilingu/image/upload/v1556940815/ilingu/student-profile-pictures/lyiqao6fvpu2bg83wrlj.jpg",
+    "version": 1556940815,
+    "width": 500
+},
+  "avatarURL": "https://res.cloudinary.com/ilingu/image/upload/v1556940815/ilingu/student-profile-pictures/lyiqao6fvpu2bg83wrlj.jpg",
+  "chineseName": "测试学生",
+  "createdAtMS": "1556496000000",
+  "email": "teststudent@testing.ilingu.com",
+  "studentName": "Test Student",
+  "studentTimezone": "Asia/Shanghai",
+  "userId": "You must replace this with your current user's user-sub"
+}

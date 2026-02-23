@@ -1,0 +1,26 @@
+[
+  {
+    "courseId": "03245c40-7f95-11e9-9272-b57d402f7ebc",
+    "courseName": "Online Chinese",
+    "defaultTeacherId": "4157310b-d3d0-45a7-acbd-cdb117557845",
+    "level": 0,
+    "productId": "14558720-667f-11e9-9ce4-07edb94d2f1a",
+    "startDate": "2019-05-26",
+    "studentId": "193176c6-410d-4703-a7ee-57d079bf78ad",
+    "teacherPool": [
+      "4157310b-d3d0-45a7-acbd-cdb117557845"
+    ]
+  },
+  {
+    "courseId": "095b9d50-7895-11e9-961c-754b259ea05f",
+    "courseName": "Online Chinese",
+    "defaultTeacherId": "b755ce8d-8c8d-4299-ab0a-7cadb9b4987d",
+    "level": 0,
+    "productId": "14558720-667f-11e9-9ce4-07edb94d2f1a",
+    "startDate": "2019-05-17",
+    "studentId": "763bcf1b-05a1-4abd-8eb6-61eac0b21e2e",
+    "teacherPool": [
+      "b755ce8d-8c8d-4299-ab0a-7cadb9b4987d"
+    ]
+  }
+]
