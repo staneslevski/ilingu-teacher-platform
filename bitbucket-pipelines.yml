@@ -1,0 +1,13 @@
+image: node:6.9.4
+
+pipelines:
+  branches:
+    master:
+    - step:
+        # set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY as environment variables
+        name: deploy
+        deployment: production # set to test, staging or production
+        # trigger: manual  # uncomment to have a manual step
+        image: atlassian/pipelines-awscli
+        script:
+          - aws s3 sync build s3://study.ilingu.com
