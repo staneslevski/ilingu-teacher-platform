@@ -1,0 +1,152 @@
+import React from "react";
+import cx from "classnames";
+import PropTypes from "prop-types";
+import { Switch, Redirect } from "react-router-dom";
+// creates a beautiful scrollbar
+import PerfectScrollbar from "perfect-scrollbar";
+import "perfect-scrollbar/css/perfect-scrollbar.css";
+
+// @material-ui/core components
+import withStyles from "@material-ui/core/styles/withStyles";
+
+// core components
+import Header from "../components/Header/Header.jsx";
+import Footer from "../components/Footer/Footer.jsx";
+import Sidebar from "../components/Sidebar/Sidebar.jsx";
+
+import adminRoutes from "../routes/appRoutes/adminIndex";
+
+import appStyle from "../assets/jss/material-dashboard-pro-react/layouts/dashboardStyle.jsx";
+
+import image from "../assets/img/sidebar-2.jpg";
+import logo from "../assets/img/logo-white.svg";
+import AppliedRoute from "../components/Routes/AppliedRoute";
+
+let ps;
+
+class Admin extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      mobileOpen: false,
+      miniActive: false
+    };
+    this.resizeFunction = this.resizeFunction.bind(this);
+  }
+  componentDidMount() {
+    if (navigator.platform.indexOf("Win") > -1) {
+      ps = new PerfectScrollbar(this.refs.mainPanel, {
+        suppressScrollX: true,
+        suppressScrollY: false
+      });
+      document.body.style.overflow = "hidden";
+    }
+    window.addEventListener("resize", this.resizeFunction);
+  }
+  componentWillUnmount() {
+    if (navigator.platform.indexOf("Win") > -1) {
+      ps.destroy();
+    }
+    window.removeEventListener("resize", this.resizeFunction);
+  }
+  componentDidUpdate(e) {
+    if (e.history.location.pathname !== e.location.pathname) {
+      this.refs.mainPanel.scrollTop = 0;
+      if (this.state.mobileOpen) {
+        this.setState({ mobileOpen: false });
+      }
+    }
+  }
+  handleDrawerToggle = () => {
+    this.setState({ mobileOpen: !this.state.mobileOpen });
+  };
+  getRoute() {
+    return this.props.location.pathname !== "/maps/full-screen-maps";
+  }
+  sidebarMinimize() {
+    this.setState({ miniActive: !this.state.miniActive });
+  }
+  resizeFunction() {
+    if (window.innerWidth >= 960) {
+      this.setState({ mobileOpen: false });
+    }
+  }
+  render() {
+    const { classes, isAuthenticated, userHasAuthenticated, handleLogout, ...rest } = this.props;
+    const mainPanel =
+      classes.mainPanel +
+      " " +
+      cx({
+        [classes.mainPanelSidebarMini]: this.state.miniActive,
+        [classes.mainPanelWithPerfectScrollbar]:
+          navigator.platform.indexOf("Win") > -1
+      });
+    return (
+      <div className={classes.wrapper}>
+        <Sidebar
+          routes={adminRoutes}
+          logoText={"iLingu"}
+          logo={logo}
+          image={image}
+          handleDrawerToggle={this.handleDrawerToggle}
+          open={this.state.mobileOpen}
+          color="blue"
+          bgColor="black"
+          miniActive={this.state.miniActive}
+          {...rest}
+        />
+        <div className={mainPanel} ref="mainPanel">
+          <Header
+            sidebarMinimize={this.sidebarMinimize.bind(this)}
+            miniActive={this.state.miniActive}
+            routes={adminRoutes}
+            handleDrawerToggle={this.handleDrawerToggle}
+            isAuthenticated={isAuthenticated}
+            handleLogout={handleLogout}
+            {...rest}
+          />
+          <div className={classes.content}>
+            <div className={classes.container}>
+              <Switch>
+                {adminRoutes.map((prop, key) => {
+                  if (prop.redirect)
+                    return <Redirect from={prop.path} to={prop.pathTo} key={key} />;
+                  if (prop.collapse)
+                    return prop.views.map((prop, key) => {
+                      return (
+                        <AppliedRoute
+                          path={prop.path}
+                          component={prop.component}
+                          key={key}
+                          props={{
+                            isAuthenticated
+                          }}
+                        />
+                      );
+                    });
+                  return (
+                    <AppliedRoute
+                      path={prop.path}
+                      component={prop.component}
+                      key={key}
+                      props={{
+                        isAuthenticated
+                      }}
+                    />
+                  );
+                })}
+              </Switch>
+            </div>
+          </div>
+          <Footer fluid />
+        </div>
+      </div>
+    );
+  }
+}
+
+Admin.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(appStyle)(Admin);
